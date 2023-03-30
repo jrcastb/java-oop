@@ -10,11 +10,15 @@ import Utils.Generics.Box;
 import Utils.Generics.GenericBox;
 import Utils.Generics.OrderedPair;
 import Utils.Generics.Pair;
+import Utils.Streams.Author;
+import Utils.Streams.Book;
 import Utils.Week;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
     static int numero;
@@ -134,7 +138,7 @@ public class Main {
         Pair<Integer, String> pair3 = new OrderedPair<>(10, "Felipe");
         Pair<GenericBox<Integer>, String> genericBoxStringPair = new OrderedPair<>(integerBox, "Generic Box Integer");
         */
-
+        /*
         Persona p1 = new Persona("Jose", "Castillo", 26);
         Persona p2 = new Persona("Carlos", "Bermudez", 24);
 
@@ -147,7 +151,7 @@ public class Main {
         System.out.println("=============================================");
         personas.sort((pa, pb) -> pa.getNombre().compareTo(pb.getNombre()));
         personas.forEach(System.out::println);
-        personas.sort((pa, pb)-> pa.getApellido().compareTo(pb.getApellido()));
+        personas.sort((pa, pb) -> pa.getApellido().compareTo(pb.getApellido()));
         System.out.println("==============================================");
         personas.forEach(System.out::println);
         System.out.println("==============================================");
@@ -156,6 +160,47 @@ public class Main {
         System.out.println("=============================================");
         personas.sort(new ComparadorNombre());
         personas.forEach(System.out::println);
+        */
+
+        
+        Author jhon = new Author("Jhon", "Kaz", "masculino", 28);
+        Book book1 = new Book("Psicoanalista", jhon,"ABC12345", 358L);
+        Author jkr = new Author("JK", "Rowling", "femenino", 37);
+        Book book2 = new Book("Harry Potter", jkr,"DBC67891", 269L);
+        Author stephen = new Author("Stephen", "King", "masculino", 74);
+        Book book3 = new Book("It", jhon,"ITI348975", 1028L);
+        Author mario = new Author("Mario", "Mendoza", "masculino", 40);
+        Book book4 = new Book("satanas", jhon,"STN89235", 652L);
+        Author gabo = new Author("Gabriel", "Garcia", "masculino", 82);
+        Book book5 = new Book("Cien años de soledad", jhon,"CND100135", 522L);
+
+
+        List<Book> books = Arrays.asList(book1, book2, book3, book4, book5);
+        System.out.println("=====================");
+
+       Integer result = books.stream().map(Book::getAuthor)
+               .filter(author -> Objects.equals(author.getGender(), Author.MASCULINO))
+               .map(Author::getAge)
+               .reduce(0, Integer::sum);
+
+
+       System.out.println("result = " + result);
+
+       /*
+       *
+                .filter(age -> age > 40)
+                .reduce(0, Integer::sum);
+       * */
+
+       Date date = new Date();
+       System.out.println("date = " + date);
+       LocalDate localDate = LocalDate.now();
+       System.out.println("localDate = " + localDate);
+        LocalTime localTime = LocalTime.now();
+        System.out.println("localTime = " + localTime);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println("localDateTime = " + localDateTime);
+        Calendar calendar = new GregorianCalendar();
 
     }
 

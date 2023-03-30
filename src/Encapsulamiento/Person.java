@@ -1,9 +1,13 @@
 package Encapsulamiento;
 
+import java.time.LocalDate;
+
 public class Person {
     private String firstName;
     private String lastName;
+
     private int age;
+    private LocalDate birthDate;
     private char gender;
     //Constructor
     public Person(){
@@ -70,5 +74,7 @@ public class Person {
         }
         return older;
     }
-
+    public Integer calculateAge(LocalDate birthDate){
+        return LocalDate.now().getYear() - birthDate.getYear();
+    }
 }
